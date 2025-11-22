@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<style>
+/* ===== Basic Reset ===== */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: black;
+    color: white;
+}
+
+/* ===== Navbar ===== */
+header {
+    background:black;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #00eaff;
+}
+
+/* ===== NAV MENU ===== */
+nav ul {
+    display: flex;
+    gap: 25px;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    color: #00eaff;
+    text-shadow: 0 0 10px #00eaff;
+}
+
+button{
+    background-color:black;
+    border-radius: 10px;
+    margin-left: 10px;
+    padding:10px;
+    border-color: aqua;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+button a{
+    color:aqua;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+button:hover{
+    box-shadow:0 0 10px aqua, 0 0 20px aqua;
+}
+
+button a:hover{
+    color:white;
+}
+
+/* =========================
+   HAMBURGER MENU (CSS ONLY) 
+   ========================= */
+#menu-toggle {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #00eaff;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* Toggle animation */
+#menu-toggle:checked + .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+}
+
+#menu-toggle:checked + .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-toggle:checked + .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+}
+
+/* Mobile menu */
+@media (max-width: 768px) {
+
+    nav ul {
+        position: absolute;
+        top: 80px;
+        right: 0;
+        background: #000d13;
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 0;
+        display: none;
+        border-top: 1px solid #00eaff55;
+    }
+
+    #menu-toggle:checked ~ ul {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    nav ul li {
+        padding: 10px 0;
+    }
+
+    button {
+        margin: auto;
+    }
+}
+
+/*slider---------------------------------------------- sections*/
+.slider-section {
+    padding: 80px 40px;
+    text-align: center;
+}
+
+.slider-section h2 {
+    font-size: 42px;
+    margin-bottom: 30px;
+    color: #00eaff;
+}
+
+.slider {
+  position: relative;
+  width: 90%;
+  margin: 50px auto;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #00eaff;
+  height:300px;
+}
+
+.slides {
+    display: flex;
+    width: calc(800px * 6);
+    animation: slide 20s infinite linear;
+}
+
+.slides img:hover {
+    transform: scale(1.05);
+}
+
+@keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-500%); }
+}
+
+/* ===== Hero Section ===== */
+.hero {
+    position: relative;
+    height: 95vh;
+    background: url('https://images.unsplash.com/photo-1518770660439-4636190af475') no-repeat center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 15, 20, 0.6);
+}
+
+.content {
+    position: relative;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 70px;
+    color: #00eaff;
+    text-shadow: 0 0 20px #00eaff;
+}
+
+.hero p {
+    font-size: 22px;
+    margin: 15px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #00eaff;
+    color:black;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.4s;
+}
+
+.btn:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+/* ===== Sections ===== */
+.about, .contact, .features, .community, .applications, .support {
+    padding: 80px 40px;
+    text-align: center;
+}
+
+.about h2, .features h2, .contact h2, .community h2, 
+.applications h2, .support h2 {
+    font-size: 42px;
+    margin-bottom: 30px;
+    color: #00eaff;
+}
+
+/* ===== Card Layout ===== */
+.feature-box, .community-box, .applications-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.card {
+    display: inline-block;
+    width: 260px;
+    background: #0a1a1f;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #00eaff55;
+    box-shadow: 0 0 10px #00eaff22;
+    text-align: center;
+    transition: 0.4s ease;
+    animation: floatCard 4s ease-in-out infinite;
+}
+
+.card:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 0 30px #00eaffbb, 0 0 60px #00eaff66;
+    border-color: #00eaff;
+}
+
+/* ===== Card Icons ===== */
+.card img.icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 5px #00eaffaa);
+    transition: 0.3s;
+}
+
+.card:hover img.icon {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 12px #00eaff);
+}
+
+/* Float animation */
+@keyframes floatCard {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* ===== Support Section ===== */
+.support ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.support ul li {
+    background: #0a1a1f;
+    padding: 15px 20px;
+    border-radius: 10px;
+}
+
+/* ===== Contact Section ===== */
+.contact form {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact input,
+.contact textarea {
+    background: #0a1a1f;
+    border: 1px solid #00eaff;
+    color: white;
+}
+
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+footer a {
+    color: aqua;
+}
+
+footer a:hover {
+    color: white;
+}
+
+.history {
+    padding: 80px 40px;
+    text-align: center;
+}
+
+.history-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.history-box .card {
+    width: 260px;
+}
+
+</style>
+
+
+<body>
+
+<header>
+    <nav>
+        <div class="logo">GENERATIVE AI</div>
+
+        <!-- Hamburger Menu (CSS only) -->
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#community">Community</a></li>
+            <li><a href="#features">Resources</a></li>
+            <li><a href="#support">Support</a></li>
+            <button><a href="#">Launch Console</a></button>
+        </ul>
+    </nav>
+</header>
+
+<!-- CONTINUE WITH YOUR ORIGINAL PAGE CONTENT HERE (unchanged) -->
+<!-- (Hero, Slider, Sections, Footer, etc.) -->
+<!-- Your full content already included above remains exactly the same -->
+
+<!-- ... existing body content continues ... -->
+
+<section class="hero">
+    <div class="overlay"></div>
+    <div class="content">
+        <h1>Generative AI</h1>
+        <p>Creating the future with intelligent algorithms.</p>
+        <a href="#about" class="btn">Explore More</a>
+    </div>
+</section>
+
+<section class="slider-section">
+    <h2>Our AI Creations</h2>
+    <div class="slider">
+        <div class="slides">
+            <img src="images/p9.png" alt="AI Image 1">
+            <img src="images/p8.jpg" alt="AI Image 2">
+            <img src="images/p7.jpg" alt="AI Image 3">
+            <img src="images/p6.jpeg" alt="AI Image 4">
+            <img src="images/p5.png" alt="AI Image 5">
+            <img src="images/p4.jpeg" alt="AI Image 6">
+        </div>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <h2>What is Generative AI?</h2>
+    <p>
+        Generative AI uses advanced neural networks to create text, images, music,
+        videos, and more. It understands patterns and generates new ideas like humans.
+    </p>
+</section>
+
+<section id="features" class="features">
+    <h2>Key Features</h2>
+    <div class="feature-box">
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" class="icon">
+            <h3>AI Text Generation</h3>
+            <p>Produce high-quality human-like text instantly.</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/4333/4333605.png" class="icon">
+            <h3>Image Creation</h3>
+            <p>Create art, designs, and realistic images using AI.</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/1995/1995529.png" class="icon">
+            <h3>Chatbot Systems</h3>
+            <p>Build smarter, more natural AI conversation systems.</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3523/3523063.png" class="icon">
+            <h3>Automation</h3>
+            <p>Automate content writing, editing, and creativity.</p>
+        </div>
+    </div>
+</section>
+
+<section id="community" class="community">
+    <h2>Community</h2>
+    <p>Join a thriving community of AI enthusiasts, developers, and researchers. Share projects, collaborate, and learn together.</p>
+    <div class="community-box">
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="icon">
+            <h3>Forums</h3>
+            <p>Engage in discussions and exchange knowledge.</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/2088/2088617.png" class="icon">
+            <h3>Events</h3>
+            <p>Participate in workshops, webinars, and hackathons.</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/189/189665.png" class="icon">
+            <h3>Open Source</h3>
+            <p>Contribute to AI projects and tools.</p>
+        </div>
+    </div>
+</section>
+
+<section id="applications" class="applications">
+    <h2>Applications of Generative AI</h2>
+    <div class="feature-box applications-box">
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/2966/2966486.png" class="icon">
+            <h3>Healthcare</h3>
+            <p>AI helps design drugs, predict diseases, and personalize treatments.</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/2058/2058148.png" class="icon">
+            <h3>Education</h3>
+            <p>Adaptive learning platforms powered by AI improve student outcomes.</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3209/3209888.png" class="icon">
+            <h3>Entertainment</h3>
+            <p>Create music, movies, and games with AI-driven creativity.</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png" class="icon">
+            <h3>Business</h3>
+            <p>Automate workflows, generate reports, and enhance customer experiences.</p>
+        </div>
+    </div>
+</section>
+
+<section id="history" class="history">
+    <h2>History of Generative AI</h2>
+    <p>Generative AI has evolved rapidly over the past decades, from simple algorithms to advanced neural networks capable of creating text, images, and more.</p>
+    
+    <div class="history-box">
+        <div class="card">
+            <img src="images/history1.jpg" class="icon" alt="Early AI">
+            <h3>1950s - Early AI</h3>
+            <p>The foundation of AI research, exploring simple machine learning concepts.</p>
+        </div>
+        <div class="card">
+            <img src="images/history2.png" class="icon" alt="Neural Networks">
+            <h3>1980s - Neural Networks</h3>
+            <p>Introduction of neural networks, enabling computers to recognize patterns and learn.</p>
+        </div>
+        <div class="card">
+            <img src="images/history3.png" class="icon" alt="GANs">
+            <h3>2014 - GANs</h3>
+            <p>Generative Adversarial Networks revolutionized AI by generating realistic images and data.</p>
+        </div>
+        <div class="card">
+            <img src="images/history4.png" class="icon" alt="Modern AI">
+            <h3>2020s - Modern AI</h3>
+            <p>Advanced models like GPT and DALL-E capable of generating text, images, music, and videos.</p>
+        </div>
+    </div>
+</section>
+
+<section id="support" class="support">
+    <h2>Support</h2>
+    <p>Need help? Our support team and resources are here for you.</p>
+    <ul>
+        <li>📘 Documentation</li>
+        <li>🎥 Tutorials</li>
+        <li>💬 Live Chat</li>
+        <li>📧 Email Support</li>
+    </ul>
+</section>
+
+<section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p style="margin-bottom: 20px;">We'd love to hear from you. Reach out for collaborations or queries.</p>
+    <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+<button type="submit" style="background:aqua; color:black; font-weight:bold; padding:12px; border-radius:8px; cursor:pointer;">
+    Send Message
+</button>        
+    </form>
+</section>
+
+
+<footer>
+    <div>
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Terms of Service</a> |
+      <a href="#">Contact Us</a>
+    </div>
+    <p>&copy; 2025 GENERATIVE AI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+
+
