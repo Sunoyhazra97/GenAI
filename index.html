@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,7 @@
 </head>
 
 <style>
-/* ===== Basic Reset ===== */
+
 *{
     margin: 0;
     padding: 0;
@@ -21,7 +22,7 @@ body {
     color: white;
 }
 
-/* ===== Navbar ===== */
+
 header {
     background:black;
     padding: 15px 40px;
@@ -42,7 +43,7 @@ nav {
     color: #00eaff;
 }
 
-/* ===== NAV MENU ===== */
+
 nav ul {
     display: flex;
     gap: 25px;
@@ -110,7 +111,7 @@ button a:hover{
     transition: 0.3s;
 }
 
-/* Toggle animation */
+
 #menu-toggle:checked + .hamburger span:nth-child(1) {
     transform: rotate(45deg) translateY(8px);
 }
@@ -123,7 +124,7 @@ button a:hover{
     transform: rotate(-45deg) translateY(-8px);
 }
 
-/* Mobile menu */
+
 @media (max-width: 768px) {
 
     nav ul {
@@ -156,18 +157,7 @@ button a:hover{
     }
 }
 
-/*slider---------------------------------------------- sections*/
-.slider-section {
-    padding: 80px 40px;
-    text-align: center;
-}
-
-.slider-section h2 {
-    font-size: 42px;
-    margin-bottom: 30px;
-    color: #00eaff;
-}
-
+/* slider---------------------------------------------- sections */
 .slider {
   position: relative;
   width: 90%;
@@ -175,25 +165,46 @@ button a:hover{
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 0 20px #00eaff;
-  height:300px;
+  height:400px;
 }
 
+/* SMOOTH SLIDER */
 .slides {
     display: flex;
-    width: calc(800px * 6);
-    animation: slide 20s infinite linear;
+    height: 100%;
+    animation: smoothSlide 20s infinite ease-in-out;
+}
+
+.slides img {
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
 }
 
 .slides img:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
-@keyframes slide {
-    0% { transform: translateX(0); }
+/* Smooth keyframes */
+@keyframes smoothSlide {
+    0%, 10% { transform: translateX(0); }
+    20%, 30% { transform: translateX(-100%); }
+    40%, 50% { transform: translateX(-200%); }
+    60%, 70% { transform: translateX(-300%); }
+    80%, 90% { transform: translateX(-400%); }
     100% { transform: translateX(-500%); }
 }
 
-/* ===== Hero Section ===== */
+
+
+@keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-83.3333%); } 
+}
+
+
 .hero {
     position: relative;
     height: 95vh;
@@ -244,7 +255,7 @@ button a:hover{
     transform: scale(1.1);
 }
 
-/* ===== Sections ===== */
+
 .about, .contact, .features, .community, .applications, .support {
     padding: 80px 40px;
     text-align: center;
@@ -257,7 +268,6 @@ button a:hover{
     color: #00eaff;
 }
 
-/* ===== Card Layout ===== */
 .feature-box, .community-box, .applications-box {
     display: flex;
     flex-wrap: wrap;
@@ -285,7 +295,7 @@ button a:hover{
     border-color: #00eaff;
 }
 
-/* ===== Card Icons ===== */
+
 .card img.icon {
     width: 70px;
     height: 70px;
@@ -299,14 +309,14 @@ button a:hover{
     filter: drop-shadow(0 0 12px #00eaff);
 }
 
-/* Float animation */
+
 @keyframes floatCard {
     0% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
     100% { transform: translateY(0); }
 }
 
-/* ===== Support Section ===== */
+
 .support ul {
     list-style: none;
     display: flex;
@@ -321,7 +331,7 @@ button a:hover{
     border-radius: 10px;
 }
 
-/* ===== Contact Section ===== */
+
 .contact form {
     max-width: 500px;
     margin: auto;
@@ -337,7 +347,7 @@ button a:hover{
     color: white;
 }
 
-/* ===== Footer ===== */
+
 footer {
     text-align: center;
     padding: 20px;
@@ -355,6 +365,7 @@ footer a:hover {
 .history {
     padding: 80px 40px;
     text-align: center;
+   
 }
 
 .history-box {
@@ -377,7 +388,7 @@ footer a:hover {
     <nav>
         <div class="logo">GENERATIVE AI</div>
 
-        <!-- Hamburger Menu (CSS only) -->
+      
         <input type="checkbox" id="menu-toggle">
         <label for="menu-toggle" class="hamburger">
             <span></span>
@@ -390,18 +401,14 @@ footer a:hover {
             <li><a href="#community">Community</a></li>
             <li><a href="#features">Resources</a></li>
             <li><a href="#support">Support</a></li>
-            <button><a href="#">Launch Console</a></button>
+            <li>
+                <button><a href="#">Launch Console</a></button>
+            </li>
         </ul>
     </nav>
 </header>
 
-<!-- CONTINUE WITH YOUR ORIGINAL PAGE CONTENT HERE (unchanged) -->
-<!-- (Hero, Slider, Sections, Footer, etc.) -->
-<!-- Your full content already included above remains exactly the same -->
-
-<!-- ... existing body content continues ... -->
-
-<section class="hero">
+<section class="hero" id="home">
     <div class="overlay"></div>
     <div class="content">
         <h1>Generative AI</h1>
@@ -411,17 +418,24 @@ footer a:hover {
 </section>
 
 <section class="slider-section">
-    <h2>Our AI Creations</h2>
+   
     <div class="slider">
-        <div class="slides">
-            <img src="images/p9.png" alt="AI Image 1">
-            <img src="images/p8.jpg" alt="AI Image 2">
-            <img src="images/p7.jpg" alt="AI Image 3">
-            <img src="images/p6.jpeg" alt="AI Image 4">
-            <img src="images/p5.png" alt="AI Image 5">
-            <img src="images/p4.jpeg" alt="AI Image 6">
-        </div>
+    <div class="slides">
+        <img src="Images/pic1.jpeg" alt="AI Image 1">
+        <img src="Images/pic5.jpeg" alt="AI Image 2">
+        <img src="Images/pic6.jpeg" alt="AI Image 3">
+        <img src="Images/pic7.jpeg" alt="AI Image 4">
+        <img src="Images/pic8.jpeg" alt="AI Image 5">
+        <img src="Images/pic9.jpeg" alt="AI Image 6">
+
+        <img src="images/pic8.jpeg" alt="AI Image 7"> 
+        <img src="Images/pic8.jpeg" alt="AI Image 8">
+        <img src="Images/pic9.jpeg" alt="AI Image 9">
+        
+        
+      
     </div>
+</div>
 </section>
 
 <section id="about" class="about">
@@ -507,8 +521,8 @@ footer a:hover {
 </section>
 
 <section id="history" class="history">
-    <h2>History of Generative AI</h2>
-    <p>Generative AI has evolved rapidly over the past decades, from simple algorithms to advanced neural networks capable of creating text, images, and more.</p>
+    <h2 >History of Generative AI</h2>
+    <p style="margin-bottom: 50px;margin-top: 20px;">Generative AI has evolved rapidly over the past decades, from simple algorithms to advanced neural networks capable of creating text, images, and more.</p>
     
     <div class="history-box">
         <div class="card">
@@ -535,8 +549,8 @@ footer a:hover {
 </section>
 
 <section id="support" class="support">
-    <h2>Support</h2>
-    <p>Need help? Our support team and resources are here for you.</p>
+    <h2 >Support</h2>
+    <p style="margin-bottom: 20px;">Need help? Our support team and resources are here for you.</p>
     <ul>
         <li>📘 Documentation</li>
         <li>🎥 Tutorials</li>
@@ -549,12 +563,12 @@ footer a:hover {
     <h2>Contact Us</h2>
     <p style="margin-bottom: 20px;">We'd love to hear from you. Reach out for collaborations or queries.</p>
     <form>
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea placeholder="Your Message" rows="5" required></textarea>
-<button type="submit" style="background:aqua; color:black; font-weight:bold; padding:12px; border-radius:8px; cursor:pointer;">
-    Send Message
-</button>        
+        <input type="text" style="border-radius:5px;padding:10px" placeholder="Your Name" required>
+        <input type="email" style="border-radius:5px; padding:10px" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" style="border-radius:5px; padding:10px" rows="5" required></textarea>
+        <button type="submit" style="background:aqua; color:black; font-weight:bold; padding:12px; border-radius:5px; cursor:pointer;">
+            Send Message
+        </button>        
     </form>
 </section>
 
@@ -570,5 +584,3 @@ footer a:hover {
 
 </body>
 </html>
-
-
